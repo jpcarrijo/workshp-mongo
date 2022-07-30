@@ -35,7 +35,7 @@ public class UserResources {
     User obj = service.findById(id);
     return ResponseEntity.ok().body(new UserDTO(obj));
   }
-  
+
   //********* Inserir ***************
   @PostMapping
   public ResponseEntity<Void> insert(@RequestBody UserDTO userDto) {
@@ -60,5 +60,4 @@ public class UserResources {
     obj = service.update(obj);
     return ResponseEntity.noContent().build();
   }
-
 }
