@@ -41,13 +41,24 @@ public class UserResources {
   public ResponseEntity<Void> insert(@RequestBody UserDTO userDto) {
     User obj = service.fromDTO(userDto);
     obj = service.insert(obj);
-    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri(); // boa prática
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri(); // boa prática. retorna o id
     return ResponseEntity.created(uri).build();
   }
 
+  // ********* Delete ***************
   @DeleteMapping(value = "/{id}") // necessário passar o valor
   public ResponseEntity<UserDTO> delete(@PathVariable String id) {
     service.delete(id);
     return ResponseEntity.noContent().build();   // delete retorna o código 204. no ResponseEntity é o noContent().build()
   }
+
+  // ******** Atualizar **************
+  @PutMapping(value = "/{id}")
+  public ResponseEntity<Void> update(@RequestBody UserDTO userDto, @PathVariable String id) {
+    User obj = service.fromDTO(userDto);
+    obj.setId(id);
+    obj = service.update(obj);
+    return ResponseEntity.noContent().build();
+  }
+
 }
