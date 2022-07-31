@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {  // necessario dois dados para o MongoRepository
                                                                          // saber o tipo de dominio que irá referenciar
-  List<Post> findByTitleContaining(String text);
+  List<Post> findByTitleContainingIgnoreCase(String text);   // ignorar maiuscula e minusc
 
 }
